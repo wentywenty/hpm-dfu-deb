@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+%:
+	dh $@
+
+override_dh_auto_build:
+	true
+
+override_dh_auto_install:
+	mkdir -p debian/hpm-manufacturing-tool/opt/hpm_manufacturing_tool
+	cp -r HPMicro_Manufacturing_Tool_v0.6.0/* debian/hpm-manufacturing-tool/opt/hpm_manufacturing_tool/
+	chmod +x debian/hpm-manufacturing-tool/opt/hpm_manufacturing_tool/hpm_manufacturing_gui
+	chmod +x debian/hpm-manufacturing-tool/opt/hpm_manufacturing_tool/hpm_manufacturing_cmd
+	chmod +x debian/hpm-manufacturing-tool/opt/hpm_manufacturing_tool/hpm_image_helper
+
+override_dh_strip:
+	# skip strip — arm64 binaries on non-arm64 host
+
+override_dh_shlibdeps:
+	# skip shlibdeps — arm64 binaries on non-arm64 host

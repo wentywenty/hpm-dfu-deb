@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+
+PROFILE_DIR="/etc/profile.d"
+PROFILE_FILE="$PROFILE_DIR/hpm_manufacturing_tool.sh"
+
+if [ ! -d "$PROFILE_DIR" ]; then
+    mkdir -p "$PROFILE_DIR"
+fi
+
+cat > "$PROFILE_FILE" <<'EOF'
+if [ -d "/opt/hpm_manufacturing_tool" ]; then
+    export PATH="/opt/hpm_manufacturing_tool:$PATH"
+fi
+EOF
+
+chmod 644 "$PROFILE_FILE"
+
+exit 0

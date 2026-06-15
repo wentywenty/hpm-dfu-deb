@@ -1,0 +1,14 @@
+Source: hpm-manufacturing-tool
+Section: devel
+Priority: optional
+Maintainer: RoboParty <2321901849@qq.com>
+Build-Depends: debhelper (>= 12)
+Standards-Version: 4.6.0
+
+Package: hpm-manufacturing-tool
+Architecture: amd64
+Depends: ${misc:Depends}
+Description: HPMicro Manufacturing Tool for DFU firmware flashing
+ HPMicro Manufacturing Tool v0.6.0 provides GUI and CLI tools
+ for programming and signing HPMicro MCU devices via USB DFU.
+ Installed to /opt/hpm_manufacturing_tool.

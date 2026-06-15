@@ -1,0 +1,37 @@
+# hpm-manufacturing-tool Debian Package
+
+Debian packaging for [HPMicro Manufacturing Tool](https://github.com/hpmicro/hpm_manufacturing_tool) v0.6.0 — GUI and CLI tools for programming and signing HPMicro MCU devices via USB DFU.
+
+## Install Location
+
+| Path | Content |
+|---|---|
+| `/opt/hpm_manufacturing_tool/` | All binaries (`hpm_manufacturing_gui`, `hpm_manufacturing_cmd`, `hpm_image_helper`) |
+| `/etc/profile.d/hpm_manufacturing_tool.sh` | PATH auto-configuration |
+
+After install, re-login or `source /etc/profile.d/hpm_manufacturing_tool.sh` to add the tools to your PATH.
+
+## Local Build
+
+```bash
+# Download and extract the upstream tarball
+wget https://github.com/hpmicro/hpm_manufacturing_tool/releases/download/v0.6.0/HPMicro_Manufacturing_Tool_v0.6.0.tar.gz
+tar -xzf HPMicro_Manufacturing_Tool_v0.6.0.tar.gz
+
+# Build the .deb (binary-only, unsigned)
+sudo apt-get install -y build-essential debhelper
+dpkg-buildpackage -us -uc -b
+
+# Output: ../hpm-manufacturing-tool_0.6.0-1_amd64.deb
+```
+
+## CI/CD
+
+Push to any branch triggers `.github/workflows/build-deb.yml`:
+
+1. Downloads upstream tarball from HPMicro releases
+2. Builds `.deb` via `dpkg-buildpackage`
+3. Uploads artifact
+4. If pushed with a `v*` tag, creates a GitHub Release with the `.deb`
+
+Manual trigger via `workflow_dispatch` is also available.
